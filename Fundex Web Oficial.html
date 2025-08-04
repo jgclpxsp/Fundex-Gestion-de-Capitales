@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundex - Tu Futuro Financiero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .logo img {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        .hero {
+            height: 100vh;
+            background: url('https://wallpaperaccess.com/full/199945.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hero-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+        }
+        .hero-content p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            padding: 15px 40px;
+            background: #ffd700;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+            background: #e6c200;
+        }
+        .services, .plans, .risk-levels, .assets, .contact {
+            padding: 100px 50px;
+            text-align: center;
+        }
+        .services h2, .plans h2, .risk-levels h2, .assets h2, .contact h2 {
+            font-size: 3em;
+            margin-bottom: 50px;
+            color: #ffd700;
+        }
+        .service-cards, .risk-cards, .assets-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .service-card, .risk-card {
+            width: 30%;
+            background: rgba(26, 26, 26, 0.8);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .service-card:hover, .risk-card:hover {
+            transform: translateY(-10px);
+        }
+        .service-card h3, .risk-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .service-card p, .risk-card p {
+            color: #ccc;
+        }
+        .plan-table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        .plan-table th, .plan-table td {
+            padding: 15px;
+            border: 1px solid #444;
+        }
+        .plan-table th {
+            background: #2d2d2d;
+            color: #ffd700;
+        }
+        .plan-table td {
+            background: #333;
+            color: #fff;
+        }
+        .asset-item {
+            width: 30%;
+            margin: 20px 0;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: #fff;
+        }
+        .contact-form button {
+            padding: 10px 30px;
+            background: #ffd700;
+            border: none;
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .contact-form button:hover {
+            background: #e6c200;
+        }
+        footer {
+            padding: 50px;
+            background: #1a1a1a;
+            text-align: center;
+            color: #ccc;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 20px;
+            }
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            .service-card, .risk-card, .asset-item {
+                width: 100%;
+            }
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            .hero-content p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="imagenes/logo corporativo fundex.png" alt="Fundex Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#plans">Planes</a></li>
+                <li><a href="#risks">Riesgos</a></li>
+                <li><a href="#assets">Activos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Bienvenido a Fundex</h1>
+            <p>Tu aliado en el mundo de las finanzas con transparencia y confianza</p>
+            <a href="#services" class="cta-button">Descubre Más</a>
+        </div>
+    </section>
+
+    <section class="services" id="services" style="background: url('https://cdn.pixabay.com/photo/2020/08/09/14/25/business-5475656_1280.jpg') no-repeat center center/cover;">
+        <h2>Nuestros Servicios</h2>
+        <div class="service-cards">
+            <a href="Asesorías.html" class="service-card">
+                <h3>Asesorías Personalizadas</h3>
+                <p>Formación clara y citas mensuales.</p>
+            </a>
+            <a href="Gestión de capitales.html" class="service-card">
+                <h3>Gestión de Capitales</h3>
+                <p>Transparencia en P&L y dividendos.</p>
+            </a>
+            <a href="Rotación estratégica del capital.html" class="service-card">
+                <h3>Rotación Estratégica</h3>
+                <p>Análisis constante del mercado.</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="plans" id="plans" style="background: url('https://cdn.pixabay.com/photo/2016/11/19/21/01/analysis-1841158_1280.jpg') no-repeat center center/cover;">
+        <h2>Planes Disponibles</h2>
+        <table class="plan-table">
+            <tr>
+                <th></th>
+                <th>Básico</th>
+                <th>Premium</th>
+                <th>Oro</th>
+            </tr>
+            <tr>
+                <td>Cuota mensual</td>
+                <td>$2,50 €</td>
+                <td>$10 €</td>
+                <td>$20 €</td>
+            </tr>
+            <tr>
+                <td>Citas/mes</td>
+                <td>4</td>
+                <td>8</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>Llamadas/mes</td>
+                <td>6</td>
+                <td>10</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>Boletines informativos/mes</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Ofertas mensuales de compras</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Acceso a fondos premium (aviso)</td>
+                <td>No, salvo solicitud</td>
+                <td>Al alcanzar capital mínimo</td>
+                <td>Acceso inmediato y rotación</td>
+            </tr>
+            <tr>
+                <td>Servicios personalizados</td>
+                <td>Solo por miedo justificado</td>
+                <td>Modificación detallada</td>
+                <td>Negación a rotaciones estratégicas</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="risk-levels" id="risks" style="background: url('https://cdn.pixabay.com/photo/2020/04/04/05/36/expedition-5000915_1280.jpg') no-repeat center center/cover;">
+        <h2>Niveles de Riesgo</h2>
+        <div class="risk-cards">
+            <a href="Bajo.html" class="risk-card">
+                <h3>Bajo</h3>
+                <p>Exposición mínima a volatilidad.</p>
+            </a>
+            <a href="Resiliente.html" class="risk-card">
+                <h3>Resiliente</h3>
+                <p>Recuperación en mercados adversos.</p>
+            </a>
+            <a href="Moderado.html" class="risk-card">
+                <h3>Moderado</h3>
+                <p>Equilibrio entre riesgo y crecimiento.</p>
+            </a>
+            <a href="Crecimiento.html" class="risk-card">
+                <h3>Crecimiento</h3>
+                <p>Potencial de alta rentabilidad.</p>
+            </a>
+            <a href="Burbujas.html" class="risk-card">
+                <h3>Burbujas</h3>
+                <p>Activos en alza rápida.</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="assets" id="assets" style="background: url('https://images.unsplash.com/photo-1643752345357-20e6e0b3d8d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;">
+        <h2>Activos Disponibles</h2>
+        <div class="assets-list">
+            <div class="asset-item">Acciones</div>
+            <div class="asset-item">Bonos</div>
+            <div class="asset-item">Letras</div>
+            <div class="asset-item">Acciones Preferentes</div>
+            <div class="asset-item">CFDs sobre Materias Primas</div>
+            <div class="asset-item">ETFs</div>
+            <div class="asset-item">Opciones</div>
+            <div class="asset-item">Posiciones en Corto</div>
+            <div class="asset-item">Forex</div>
+            <div class="asset-item">Crypto</div>
+            <div class="asset-item">NFTs</div>
+            <div class="asset-item">Permutas</div>
+            <div class="asset-item">Tokens</div>
+            <div class="asset-item">Otros Derivados</div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact" style="background: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;">
+        <h2>Contáctanos</h2>
+        <div class="contact-form">
+            <form action="mailto:bendomias@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Nombre" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Mensaje" rows="5" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Fundex. Todos los derechos reservados.</p>
+        <p><img src="imagenes/fundex letras.png" alt="Fundex Text" style="height: 40px;"></p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
